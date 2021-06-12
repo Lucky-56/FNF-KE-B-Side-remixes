@@ -302,7 +302,7 @@ class PlayState extends MusicBeatState
 		persistentDraw = true;
 
 		if (SONG == null)
-			SONG = Song.loadFromJson('tutorial');
+			SONG = Song.loadFromJson('tutorial', 'tutorial');
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
@@ -337,7 +337,22 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('thorns/thornsDialogue'));
 		}
 
-		switch(SONG.stage)
+		//defaults if no stage was found in chart
+		var stageCheck:String = 'stage';
+		
+		if (SONG.stage == null) {
+			switch(storyWeek)
+			{
+				case 2: stageCheck = 'halloween';
+				case 3: stageCheck = 'philly';
+				case 4: stageCheck = 'limo';
+				case 5: if (songLowercase == 'winter-horrorland') {stageCheck = 'mallEvil';} else {stageCheck = 'mall';}
+				case 6: if (songLowercase == 'thorns') {stageCheck = 'schoolEvil';} else {stageCheck = 'school';}
+				//i should check if its stage (but this is when none is found in chart anyway)
+			}
+		} else {stageCheck = SONG.stage;}
+
+		switch(stageCheck)
 		{
 			case 'halloween': 
 			{
@@ -716,21 +731,33 @@ class PlayState extends MusicBeatState
 					add(stageCurtains);
 			}
 		}
-		var gfVersion:String = 'gf';
 
-		switch (SONG.gfVersion)
+		//defaults if no gf was found in chart
+		var gfCheck:String = 'gf';
+		
+		if (SONG.gfVersion == null) {
+			switch(storyWeek)
+			{
+				case 4: gfCheck = 'gf-car';
+				case 5: gfCheck = 'gf-christmas';
+				case 6: gfCheck = 'gf-pixel';
+			}
+		} else {gfCheck = SONG.gfVersion;}
+
+		var curGf:String = '';
+		switch (gfCheck)
 		{
 			case 'gf-car':
-				gfVersion = 'gf-car';
+				curGf = 'gf-car';
 			case 'gf-christmas':
-				gfVersion = 'gf-christmas';
+				curGf = 'gf-christmas';
 			case 'gf-pixel':
-				gfVersion = 'gf-pixel';
+				curGf = 'gf-pixel';
 			default:
-				gfVersion = 'gf';
+				curGf = 'gf';
 		}
 
-		gf = new Character(400, 130, gfVersion);
+		gf = new Character(400, 130, curGf);
 		gf.scrollFactor.set(0.95, 0.95);
 
 		dad = new Character(100, 100, SONG.player2);
@@ -1071,17 +1098,11 @@ class PlayState extends MusicBeatState
 		senpaiEvil.updateHitbox();
 		senpaiEvil.screenCenter();
 
-		// pre lowercasing the song name (schoolIntro)
-		var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
-			switch (songLowercase) {
-				case 'dad-battle': songLowercase = 'dadbattle';
-				case 'philly-nice': songLowercase = 'philly';
-			}
-		if (songLowercase == 'roses' || songLowercase == 'thorns')
+		if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'roses' || StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'thorns')
 		{
 			remove(black);
 
-			if (songLowercase == 'thorns')
+			if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'thorns')
 			{
 				add(red);
 			}
@@ -1101,7 +1122,7 @@ class PlayState extends MusicBeatState
 				{
 					inCutscene = true;
 
-					if (songLowercase == 'thorns')
+					if (StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase() == 'thorns')
 					{
 						add(senpaiEvil);
 						senpaiEvil.alpha = 0;
@@ -1518,7 +1539,14 @@ class PlayState extends MusicBeatState
 			// FlxG.log.add(i);
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
 
-			switch (SONG.noteStyle)
+			//defaults if no noteStyle was found in chart
+			var noteTypeCheck:String = 'normal';
+		
+			if (SONG.noteStyle == null) {
+				switch(storyWeek) {case 6: noteTypeCheck = 'pixel';}
+			} else {noteTypeCheck = SONG.noteStyle;}
+
+			switch (noteTypeCheck)
 			{
 				case 'pixel':
 					babyArrow.loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels'), true, 17, 17);
@@ -2549,30 +2577,20 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					var difficulty:String = "";
+					
+					// adjusting the song name to be compatible
+					var songFormat = StringTools.replace(PlayState.storyPlaylist[0], " ", "-");
+					switch (songFormat) {
+						case 'Dad-Battle': songFormat = 'Dadbattle';
+						case 'Philly-Nice': songFormat = 'Philly';
+					}
 
-					if (storyDifficulty == 0)
-						difficulty = '-easy';
-
-					if (storyDifficulty == 2)
-						difficulty = '-hard';
+					var poop:String = Highscore.formatSong(songFormat, storyDifficulty);
 
 					trace('LOADING NEXT SONG');
-					// pre lowercasing the next story song name
-					var nextSongLowercase = StringTools.replace(PlayState.storyPlaylist[0], " ", "-").toLowerCase();
-						switch (nextSongLowercase) {
-							case 'dad-battle': nextSongLowercase = 'dadbattle';
-							case 'philly-nice': nextSongLowercase = 'philly';
-						}
-					trace(nextSongLowercase + difficulty);
+					trace(poop);
 
-					// pre lowercasing the song name (endSong)
-					var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
-					switch (songLowercase) {
-						case 'dad-battle': songLowercase = 'dadbattle';
-						case 'philly-nice': songLowercase = 'philly';
-					}
-					if (songLowercase == 'eggnog')
+					if (StringTools.replace(PlayState.storyPlaylist[0], " ", "-").toLowerCase() == 'eggnog')
 					{
 						var blackShit:FlxSprite = new FlxSprite(-FlxG.width * FlxG.camera.zoom,
 							-FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
@@ -2587,7 +2605,8 @@ class PlayState extends MusicBeatState
 					FlxTransitionableState.skipNextTransOut = true;
 					prevCamFollow = camFollow;
 
-					PlayState.SONG = Song.loadFromJson(nextSongLowercase + difficulty, PlayState.storyPlaylist[0]);
+
+					PlayState.SONG = Song.loadFromJson(poop, PlayState.storyPlaylist[0]);
 					FlxG.sound.music.stop();
 
 					LoadingState.loadAndSwitchState(new PlayState());
