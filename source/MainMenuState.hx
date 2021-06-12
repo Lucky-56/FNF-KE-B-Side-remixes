@@ -148,33 +148,19 @@ class MainMenuState extends MusicBeatState
 		if (!selectedSomethin)
 		{
 			if (controls.UP_P)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(-1);
-			}
+				{ changeItem(-1); }
 
 			if (controls.DOWN_P)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(1);
-			}
+				{ changeItem(1); }
 
 			if (controls.LEFT_P && optionShit[curSelected] == 'story mode')
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				trace('previous');
-			}
+				{ changeGameStyle(-1); }
 
 			if (controls.RIGHT_P && optionShit[curSelected] == 'story mode')
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				trace('next');
-			}
+				{ changeGameStyle(1); }
 
 			if (controls.BACK)
-			{
-				FlxG.switchState(new TitleState());
-			}
+				{ FlxG.switchState(new TitleState()); }
 
 			if (controls.ACCEPT)
 			{
@@ -234,9 +220,9 @@ class MainMenuState extends MusicBeatState
 			case 'story mode':
 				FlxG.switchState(new StoryMenuState());
 				trace("Story Menu Selected");
+
 			case 'freeplay':
 				FlxG.switchState(new FreeplayState());
-
 				trace("Freeplay Menu Selected");
 
 			case 'options':
@@ -255,6 +241,8 @@ class MainMenuState extends MusicBeatState
 			if (curSelected < 0)
 				curSelected = menuItems.length - 1;
 		}
+		FlxG.sound.play(Paths.sound('scrollMenu'));
+
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.animation.play('idle');
@@ -267,5 +255,22 @@ class MainMenuState extends MusicBeatState
 
 			spr.updateHitbox();
 		});
+	}
+
+	function changeGameStyle(huh:Int = 0)
+	{
+		if (finishedFunnyMove)
+		{
+			FlxG.save.data.gameStyle += huh;
+
+			if (FlxG.save.data.gameStyle >= KadeEngineData.gameStyleTypes.length)
+				FlxG.save.data.gameStyle = 0;
+			if (FlxG.save.data.gameStyle < 0)
+				FlxG.save.data.gameStyle = KadeEngineData.gameStyleTypes.length - 1;
+		}
+		KadeEngineData.initGamemode();
+		FlxG.sound.playMusic(Paths.music('freakyMenu'));
+
+		new MainMenuState();
 	}
 }

@@ -79,28 +79,28 @@ class LoadingState extends MusicBeatState
 	{
 		if (!Assets.cache.hasSound(path))
 		{
-			var library = Assets.getLibrary("songs");
+			var library = Assets.getLibrary(KadeEngineData.gameStyleName + "/songs");
 			final symbolPath = path.split(":").pop();
 			// @:privateAccess
 			// library.types.set(symbolPath, SOUND);
 			// @:privateAccess
 			// library.pathGroups.set(symbolPath, [library.__cacheBreak(symbolPath)]);
 			var callback = callbacks.add("song:" + path);
-			Assets.loadSound(path).onComplete(function (_) { callback(); });
+			Assets.loadSound(KadeEngineData.gameStyleName + path).onComplete(function (_) { callback(); });
 		}
 	}
 	
 	function checkLibrary(library:String)
 	{
-		trace(Assets.hasLibrary(library));
-		if (Assets.getLibrary(library) == null)
+		trace(Assets.hasLibrary(KadeEngineData.gameStyleName + library));
+		if (Assets.getLibrary(KadeEngineData.gameStyleName + library) == null)
 		{
 			@:privateAccess
-			if (!LimeAssets.libraryPaths.exists(library))
+			if (!LimeAssets.libraryPaths.exists(KadeEngineData.gameStyleName + library))
 				throw "Missing library: " + library;
 			
 			var callback = callbacks.add("library:" + library);
-			Assets.loadLibrary(library).onComplete(function (_) { callback(); });
+			Assets.loadLibrary(KadeEngineData.gameStyleName + library).onComplete(function (_) { callback(); });
 		}
 	}
 	
@@ -169,12 +169,12 @@ class LoadingState extends MusicBeatState
 	#if NO_PRELOAD_ALL
 	static function isSoundLoaded(path:String):Bool
 	{
-		return Assets.cache.hasSound(path);
+		return Assets.cache.hasSound(KadeEngineData.gameStyleName + path);
 	}
 	
 	static function isLibraryLoaded(library:String):Bool
 	{
-		return Assets.getLibrary(library) != null;
+		return Assets.getLibrary(KadeEngineData.gameStyleName + library) != null;
 	}
 	#end
 	
@@ -219,7 +219,7 @@ class LoadingState extends MusicBeatState
 				rootPath = Path.directory(path);
 			}
 			@:privateAccess
-			path = LimeAssets.__cacheBreak(path);
+			path = LimeAssets.__cacheBreak(KadeEngineData.gameStyleName + path);
 		}
 
 		AssetManifest.loadFromFile(path, rootPath).onComplete(function(manifest)

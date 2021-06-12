@@ -49,16 +49,11 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-
-		#if polymod
-		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
-		#end
-
 		@:privateAccess
 		{
 			trace("Loaded " + openfl.Assets.getLibrary("default").assetsLoaded + " assets (DEFAULT)");
 		}
-		
+
 		PlayerSettings.init();
 
 		#if windows
@@ -67,7 +62,6 @@ class TitleState extends MusicBeatState
 		Application.current.onExit.add (function (exitCode) {
 			DiscordClient.shutdown();
 		 });
-		 
 		#end
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());

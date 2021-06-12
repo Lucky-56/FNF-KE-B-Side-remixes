@@ -4,6 +4,8 @@ import flixel.FlxG;
 class KadeEngineData
 {
     public static var gameStyleName:String = "fnf";
+	public static var gameStyleTypes:Array<String> = ['fnf', 'b-side'];
+
 	public static function initSave()
     {
         if (FlxG.save.data.newInput == null)
@@ -79,13 +81,6 @@ class KadeEngineData
 		if (FlxG.save.data.customStrumLine == null)
 			FlxG.save.data.customStrumLine = 0;
 
-		if (FlxG.save.data.gameStyle == null)
-			FlxG.save.data.gameStyle = 0;
-
-		var styles:Array<String> = ['fnf', 'b-side'];
-		gameStyleName = styles[FlxG.save.data.gameStyle];
-		trace('gameStyle should be ' + FlxG.save.data.gameStyle + ' ' + gameStyleName + ' (gucci)');
-
 		if (FlxG.save.data.disableIntroOffset == null)
 			FlxG.save.data.disableIntroOffset = false;
 
@@ -97,5 +92,16 @@ class KadeEngineData
 		KeyBinds.keyCheck();
 
 		(cast (Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
+
+		initGamemode();
+	}
+
+	public static function initGamemode()
+    {
+        if (FlxG.save.data.gameStyle == null)
+			FlxG.save.data.gameStyle = 0;
+
+		gameStyleName = gameStyleTypes[FlxG.save.data.gameStyle];
+		trace('gameStyle should be ' + FlxG.save.data.gameStyle + ' ' + gameStyleName + ' (gucci)');
 	}
 }

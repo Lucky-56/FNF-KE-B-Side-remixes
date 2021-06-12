@@ -623,16 +623,13 @@ class GameMode extends Option
 	{
 		FlxG.save.data.gameStyle = FlxG.save.data.gameStyle != 0 ? 0 : 1;
 		trace('FlxG.save.data.gameStyle now: ' + FlxG.save.data.gameStyle);
-		//FlxG.save.data.gameStyle = FlxG.save.data.gameStyle != 1 ? FlxG.save.data.gameStyle + 1 : 0;
+		KadeEngineData.initGamemode();
 		display = updateDisplay();
 		return true;
 	}
 	
 	private override function updateDisplay():String
-	{
-		var styles:Array<String> = ['fnf', 'b-side'];
-		return "Gamemode " + styles[FlxG.save.data.gameStyle];
-	}
+		return "Gamemode " + KadeEngineData.gameStyleTypes[FlxG.save.data.gameStyle];
 }
 class Secret extends Option
 {

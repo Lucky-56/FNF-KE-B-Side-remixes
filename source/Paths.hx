@@ -5,6 +5,8 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
 
+using StringTools;
+
 class Paths
 {
 	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
@@ -37,7 +39,7 @@ class Paths
 
 	static public function getLibraryPath(file:String, library = "fnf/preload")
 	{
-		return if (library == "fnf/preload" || library == "fnf/default") getPreloadPath(file); else getLibraryPathForce(file, library);
+		return if (library.endsWith("default") || library.endsWith("preload")) getPreloadPath(file); else getLibraryPathForce(file, library);
 	}
 
 	inline static function getLibraryPathForce(file:String, library:String)
