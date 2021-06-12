@@ -611,6 +611,29 @@ class IntroOffsetOption extends Option
 	private override function updateDisplay():String
 		return "Intro Offset: " + (FlxG.save.data.disableIntroOffset ? "at song start" : "at notes");
 }
+class GameMode extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+	
+	public override function press():Bool
+	{
+		FlxG.save.data.gameStyle = FlxG.save.data.gameStyle != 0 ? 0 : 1;
+		trace('FlxG.save.data.gameStyle now: ' + FlxG.save.data.gameStyle);
+		//FlxG.save.data.gameStyle = FlxG.save.data.gameStyle != 1 ? FlxG.save.data.gameStyle + 1 : 0;
+		display = updateDisplay();
+		return true;
+	}
+	
+	private override function updateDisplay():String
+	{
+		var styles:Array<String> = ['fnf', 'b-side'];
+		return "Gamemode " + styles[FlxG.save.data.gameStyle];
+	}
+}
 class Secret extends Option
 {
 	public function new(desc:String)
@@ -633,5 +656,5 @@ class Secret extends Option
 	}
 	
 	private override function updateDisplay():String
-		return "Secret" + (FlxG.save.data.secret ? " Discovered" : "");
+		return "Secret " + (FlxG.save.data.secret ? "Discovered" : "");
 }

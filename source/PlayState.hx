@@ -1209,7 +1209,7 @@ class PlayState extends MusicBeatState
 				case 'dad-battle': songLowercase = 'dadbattle';
 				case 'philly-nice': songLowercase = 'philly';
 			}
-			var songPathTwo = 'assets/' + FlxG.save.data.gameStyle + '/data/' + songLowercase + '/';
+			var songPathTwo = 'assets/' + KadeEngineData.gameStyleName + '/data/' + songLowercase + '/';
 			for(file in sys.FileSystem.readDirectory(songPathTwo))
 			{
 				var pathTwo = haxe.io.Path.join([songPathTwo, file]);
@@ -1437,7 +1437,7 @@ class PlayState extends MusicBeatState
 			}
 		// Per song offset check
 		#if windows
-			var songPath = 'assets/' + FlxG.save.data.gameStyle + '/data/' + songLowercase + '/';
+			var songPath = 'assets/' + KadeEngineData.gameStyleName + '/data/' + songLowercase + '/';
 			
 			for(file in sys.FileSystem.readDirectory(songPath))
 			{

@@ -119,7 +119,7 @@ class PauseSubState extends MusicBeatSubstate
 		var rightP = controls.RIGHT_P;
 		var accepted = controls.ACCEPT;
 		var oldOffset:Float = 0;
-		var songPath = 'assets/' + FlxG.save.data.gameStyle + '/data/' + PlayState.SONG.song.toLowerCase() + '/';
+		var songPath = 'assets/' + KadeEngineData.gameStyleName + '/data/' + PlayState.SONG.song.toLowerCase() + '/';
 
 		if (upP)
 		{

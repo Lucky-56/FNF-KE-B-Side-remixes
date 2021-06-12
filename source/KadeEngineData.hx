@@ -3,12 +3,10 @@ import flixel.FlxG;
 
 class KadeEngineData
 {
-    public static function initSave()
+    public static var gameStyleName:String = "fnf";
+	public static function initSave()
     {
-        if (FlxG.save.data.gameStyle == null)
-			FlxG.save.data.gameStyle = 'fnf';
-
-		if (FlxG.save.data.newInput == null)
+        if (FlxG.save.data.newInput == null)
 			FlxG.save.data.newInput = true;
 
 		if (FlxG.save.data.downscroll == null)
@@ -80,6 +78,13 @@ class KadeEngineData
 		
 		if (FlxG.save.data.customStrumLine == null)
 			FlxG.save.data.customStrumLine = 0;
+
+		if (FlxG.save.data.gameStyle == null)
+			FlxG.save.data.gameStyle = 0;
+
+		var styles:Array<String> = ['fnf', 'b-side'];
+		gameStyleName = styles[FlxG.save.data.gameStyle];
+		trace('gameStyle should be ' + FlxG.save.data.gameStyle + ' ' + gameStyleName + ' (gucci)');
 
 		if (FlxG.save.data.disableIntroOffset == null)
 			FlxG.save.data.disableIntroOffset = false;

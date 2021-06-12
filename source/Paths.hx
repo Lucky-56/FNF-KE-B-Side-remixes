@@ -27,7 +27,7 @@ class Paths
 			if (OpenFlAssets.exists(levelPath, type))
 				return levelPath;
 
-			levelPath = getLibraryPathForce(file, "shared");
+			levelPath = getLibraryPathForce(file, "fnf/shared");
 			if (OpenFlAssets.exists(levelPath, type))
 				return levelPath;
 		}
@@ -35,19 +35,19 @@ class Paths
 		return getPreloadPath(file);
 	}
 
-	static public function getLibraryPath(file:String, library = "preload")
+	static public function getLibraryPath(file:String, library = "fnf/preload")
 	{
-		return if (library == "preload" || library == "default") getPreloadPath(file); else getLibraryPathForce(file, library);
+		return if (library == "fnf/preload" || library == "fnf/default") getPreloadPath(file); else getLibraryPathForce(file, library);
 	}
 
 	inline static function getLibraryPathForce(file:String, library:String)
 	{
-		return '$library:assets/' + FlxG.save.data.gameStyle + '/$library/$file';
+		return KadeEngineData.gameStyleName + '/$library:assets/' + KadeEngineData.gameStyleName + '/$library/$file';
 	}
 
 	inline static function getPreloadPath(file:String)
 	{
-		return 'assets/' + FlxG.save.data.gameStyle + '/$file';
+		return 'assets/' + KadeEngineData.gameStyleName + '/$file';
 	}
 
 	inline static public function file(file:String, type:AssetType = TEXT, ?library:String)
@@ -102,7 +102,7 @@ class Paths
 				case 'dad-battle': songLowercase = 'dadbattle';
 				case 'philly-nice': songLowercase = 'philly';
 			}
-		return 'songs:assets/' + FlxG.save.data.gameStyle + '/songs/${songLowercase}/Voices.$SOUND_EXT';
+		return KadeEngineData.gameStyleName + '/songs:assets/' + KadeEngineData.gameStyleName + '/songs/${songLowercase}/Voices.$SOUND_EXT';
 	}
 
 	inline static public function inst(song:String)
@@ -112,7 +112,7 @@ class Paths
 				case 'dad-battle': songLowercase = 'dadbattle';
 				case 'philly-nice': songLowercase = 'philly';
 			}
-		return 'songs:assets/' + FlxG.save.data.gameStyle + '/songs/${songLowercase}/Inst.$SOUND_EXT';
+		return KadeEngineData.gameStyleName + '/songs:assets/' + KadeEngineData.gameStyleName + '/songs/${songLowercase}/Inst.$SOUND_EXT';
 	}
 
 	inline static public function image(key:String, ?library:String)
@@ -122,7 +122,7 @@ class Paths
 
 	inline static public function font(key:String)
 	{
-		return 'assets/' + FlxG.save.data.gameStyle + '/fonts/$key';
+		return 'assets/' + KadeEngineData.gameStyleName + '/fonts/$key';
 	}
 
 	inline static public function getSparrowAtlas(key:String, ?library:String)

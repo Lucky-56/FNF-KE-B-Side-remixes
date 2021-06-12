@@ -49,13 +49,9 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+
 		#if polymod
 		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
-		#end
-		
-		#if sys
-		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/" + FlxG.save.data.gameStyle + "/replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/" + FlxG.save.data.gameStyle + "/replays");
 		#end
 
 		@:privateAccess
@@ -89,7 +85,13 @@ class TitleState extends MusicBeatState
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
+		trace('KadeEngineData said:');
 		KadeEngineData.initSave();
+
+		#if sys
+		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/" + KadeEngineData.gameStyleName + "/replays"))
+			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/" + KadeEngineData.gameStyleName + "/replays");
+		#end
 
 		Highscore.load();
 

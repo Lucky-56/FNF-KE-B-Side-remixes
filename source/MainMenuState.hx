@@ -159,6 +159,18 @@ class MainMenuState extends MusicBeatState
 				changeItem(1);
 			}
 
+			if (controls.LEFT_P && optionShit[curSelected] == 'story mode')
+			{
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+				trace('previous');
+			}
+
+			if (controls.RIGHT_P && optionShit[curSelected] == 'story mode')
+			{
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+				trace('next');
+			}
+
 			if (controls.BACK)
 			{
 				FlxG.switchState(new TitleState());
