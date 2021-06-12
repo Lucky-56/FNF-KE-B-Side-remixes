@@ -5,7 +5,10 @@ class KadeEngineData
 {
     public static function initSave()
     {
-        if (FlxG.save.data.newInput == null)
+        if (FlxG.save.data.gameStyle == null)
+			FlxG.save.data.gameStyle = 'fnf';
+
+		if (FlxG.save.data.newInput == null)
 			FlxG.save.data.newInput = true;
 
 		if (FlxG.save.data.downscroll == null)

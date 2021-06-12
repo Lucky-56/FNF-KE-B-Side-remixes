@@ -54,8 +54,8 @@ class TitleState extends MusicBeatState
 		#end
 		
 		#if sys
-		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays");
+		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/" + FlxG.save.data.gameStyle + "/replays"))
+			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/" + FlxG.save.data.gameStyle + "/replays");
 		#end
 
 		@:privateAccess
