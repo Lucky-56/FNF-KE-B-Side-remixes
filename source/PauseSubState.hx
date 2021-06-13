@@ -35,7 +35,7 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		super();
 
-		pauseMusic = new FlxSound().loadEmbedded(Paths.music('breakfast'), true, true);
+		pauseMusic = new FlxSound().loadEmbedded(Paths.music('breakfast',KadeEngineData.gameStyleName), true, true);
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 
@@ -52,21 +52,21 @@ class PauseSubState extends MusicBeatSubstate
 		var gameInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		gameInfo.text += detailsText;
 		gameInfo.scrollFactor.set();
-		gameInfo.setFormat(Paths.font("vcr.ttf"), 32);
+		gameInfo.setFormat(Paths.font("vcr.ttf",KadeEngineData.gameStyleName), 32);
 		gameInfo.updateHitbox();
 		add(gameInfo);
 
 		var levelInfo:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
 		levelInfo.text += "Song: " + PlayState.SONG.song;
 		levelInfo.scrollFactor.set();
-		levelInfo.setFormat(Paths.font("vcr.ttf"), 32);
+		levelInfo.setFormat(Paths.font("vcr.ttf",KadeEngineData.gameStyleName), 32);
 		levelInfo.updateHitbox();
 		add(levelInfo);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
 		levelDifficulty.text += "Diffculty: " + CoolUtil.difficultyString();
 		levelDifficulty.scrollFactor.set();
-		levelDifficulty.setFormat(Paths.font('vcr.ttf'), 32);
+		levelDifficulty.setFormat(Paths.font('vcr.ttf',KadeEngineData.gameStyleName), 32);
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 

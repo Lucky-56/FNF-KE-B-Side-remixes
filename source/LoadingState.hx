@@ -37,7 +37,7 @@ class LoadingState extends MusicBeatState
 	override function create()
 	{
 		logo = new FlxSprite(-150, -100);
-		logo.frames = Paths.getSparrowAtlas('logoBumpin');
+		logo.frames = Paths.getSparrowAtlas('logoBumpin',KadeEngineData.gameStyleName);
 		logo.antialiasing = true;
 		logo.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logo.animation.play('bump');
@@ -46,7 +46,7 @@ class LoadingState extends MusicBeatState
 		// logoBl.color = FlxColor.BLACK;
 
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
-		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
+		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle',KadeEngineData.gameStyleName);
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.antialiasing = true;
@@ -136,12 +136,12 @@ class LoadingState extends MusicBeatState
 	
 	static function getSongPath()
 	{
-		return Paths.inst(PlayState.SONG.song);
+		return Paths.inst(PlayState.SONG.song,KadeEngineData.gameStyleName);
 	}
 	
 	static function getVocalPath()
 	{
-		return Paths.voices(PlayState.SONG.song);
+		return Paths.voices(PlayState.SONG.song,KadeEngineData.gameStyleName);
 	}
 	
 	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)

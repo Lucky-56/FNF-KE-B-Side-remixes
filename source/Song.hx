@@ -57,7 +57,7 @@ class Song
 		
 		trace('loading ' + folderLowercase + '/' + jsonInput.toLowerCase());
 
-		var rawJson = Assets.getText(Paths.json(folderLowercase + '/' + jsonInput.toLowerCase())).trim();
+		var rawJson = Assets.getText(Paths.json(folderLowercase + '/' + jsonInput.toLowerCase(),KadeEngineData.gameStyleName)).trim();
 
 		while (!rawJson.endsWith("}"))
 		{

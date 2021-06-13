@@ -641,7 +641,7 @@ class Secret extends Option
 	
 	public override function press():Bool
 	{
-		FlxG.sound.play(Paths.sound("fartsoundlol"));
+		FlxG.sound.play(Paths.sound("fartsoundlol", 'main'));
 		if (!FlxG.save.data.secret)
 		{
 			FlxG.save.data.secret = true;

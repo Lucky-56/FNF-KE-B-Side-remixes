@@ -54,12 +54,12 @@ class MainMenuState extends MusicBeatState
 
 		if (!FlxG.sound.music.playing)
 		{
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			FlxG.sound.playMusic(Paths.music('freakyMenu',KadeEngineData.gameStyleName));
 		}
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('menuBG'));
+		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('menuBG',KadeEngineData.gameStyleName));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.10;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
@@ -71,7 +71,7 @@ class MainMenuState extends MusicBeatState
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
+		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat',KadeEngineData.gameStyleName));
 		magenta.scrollFactor.x = 0;
 		magenta.scrollFactor.y = 0.10;
 		magenta.setGraphicSize(Std.int(magenta.width * 1.1));
@@ -86,7 +86,7 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
+		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets',KadeEngineData.gameStyleName);
 
 		for (i in 0...optionShit.length)
 		{
@@ -165,7 +165,7 @@ class MainMenuState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				selectedSomethin = true;
-				FlxG.sound.play(Paths.sound('confirmMenu'));
+				FlxG.sound.play(Paths.sound('confirmMenu',KadeEngineData.gameStyleName));
 				
 				if (FlxG.save.data.flashing)
 					FlxFlicker.flicker(magenta, 1.1, 0.15, false);
@@ -241,7 +241,7 @@ class MainMenuState extends MusicBeatState
 			if (curSelected < 0)
 				curSelected = menuItems.length - 1;
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
@@ -269,8 +269,8 @@ class MainMenuState extends MusicBeatState
 				FlxG.save.data.gameStyle = KadeEngineData.gameStyleTypes.length - 1;
 		}
 		KadeEngineData.initGamemode();
-		FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		FlxG.sound.playMusic(Paths.music('freakyMenu',KadeEngineData.gameStyleName));
 
-		new MainMenuState();
+		create();
 	}
 }

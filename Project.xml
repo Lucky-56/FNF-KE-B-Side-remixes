@@ -41,6 +41,9 @@
 
 	<classpath name="source" />
 
+	<assets path="assets/main/preload" rename="assets/main" exclude="*.ogg" if="web"/>
+	<assets path="assets/main/preload" rename="assets/main" exclude="*.mp3" unless="web"/>
+
 	<assets path="assets/fnf/preload" rename="assets/fnf" exclude="*.ogg" if="web"/>
 	<assets path="assets/fnf/preload" rename="assets/fnf" exclude="*.mp3" unless="web"/>
 

@@ -84,7 +84,7 @@ class OptionsMenu extends MusicBeatState
 	override function create()
 	{
 		instance = this;
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menuDesat"));
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menuDesat",KadeEngineData.gameStyleName));
 
 		menuBG.color = 0xFFea71fd;
 		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
@@ -254,7 +254,7 @@ class OptionsMenu extends MusicBeatState
 		// NGio.logEvent("Fresh");
 		#end
 		
-		FlxG.sound.play(Paths.sound("scrollMenu"), 0.4);
+		FlxG.sound.play(Paths.sound("scrollMenu",KadeEngineData.gameStyleName), 0.4);
 
 		curSelected += change;
 

@@ -31,7 +31,7 @@ class LoadReplayState extends MusicBeatState
 	var poggerDetails:FlxText;
 	override function create()
 	{
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat',KadeEngineData.gameStyleName));
         #if sys
 		controlsStrings = sys.FileSystem.readDirectory(Sys.getCwd() + "/assets/" + KadeEngineData.gameStyleName + "/replays/");
         #end
@@ -176,7 +176,7 @@ class LoadReplayState extends MusicBeatState
 		// NGio.logEvent('Fresh');
 		#end
 		
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName), 0.4);
 
 		curSelected += change;
 

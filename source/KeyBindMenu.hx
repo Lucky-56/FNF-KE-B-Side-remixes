@@ -106,18 +106,18 @@ class KeyBindMenu extends FlxSubState
             case "select":
                 if (FlxG.keys.justPressed.UP)
 				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
 					changeItem(-1);
 				}
 
 				if (FlxG.keys.justPressed.DOWN)
 				{
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
 					changeItem(1);
 				}
 
                 if (FlxG.keys.justPressed.ENTER){
-                    FlxG.sound.play(Paths.sound('scrollMenu'));
+                    FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
                     state = "input";
                 }
                 else if(FlxG.keys.justPressed.ESCAPE){
@@ -137,7 +137,7 @@ class KeyBindMenu extends FlxSubState
                 if(FlxG.keys.justPressed.ESCAPE){
                     keys[curSelected] = tempKey;
                     state = "select";
-                    FlxG.sound.play(Paths.sound('confirmMenu'));
+                    FlxG.sound.play(Paths.sound('confirmMenu',KadeEngineData.gameStyleName));
                 }
                 else if(FlxG.keys.justPressed.ENTER){
                     addKey(defaultKeys[curSelected]);
@@ -238,11 +238,11 @@ class KeyBindMenu extends FlxSubState
 
         if(shouldReturn){
             keys[curSelected] = r;
-            FlxG.sound.play(Paths.sound('scrollMenu'));
+            FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
         }
         else{
             keys[curSelected] = tempKey;
-            FlxG.sound.play(Paths.sound('scrollMenu'));
+            FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
             keyWarning.alpha = 1;
             warningTween.cancel();
             warningTween = FlxTween.tween(keyWarning, {alpha: 0}, 0.5, {ease: FlxEase.circOut, startDelay: 2});

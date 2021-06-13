@@ -77,7 +77,7 @@ class TitleState extends MusicBeatState
 		trace('NEWGROUNDS LOL');
 		#end
 
-		FlxG.save.bind('funkin', 'ninjamuffin99');
+		FlxG.save.bind('funkin', 'settings');
 
 		trace('KadeEngineData said:');
 		KadeEngineData.initSave();
@@ -144,7 +144,7 @@ class TitleState extends MusicBeatState
 			// music.loadStream(Paths.music('freakyMenu'));
 			// FlxG.sound.list.add(music);
 			// music.play();
-			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+			FlxG.sound.playMusic(Paths.music('freakyMenu',KadeEngineData.gameStyleName), 0);
 
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
@@ -152,11 +152,17 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('bg'));
-		add(bg);
+		if(KadeEngineData.gameStyleName != 'b-side')
+		{
+			var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+			add(bg);
+		} else {
+			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('bg', KadeEngineData.gameStyleName));
+			add(bg);
+		}
 
 		logoBl = new FlxSprite(-150, -100);
-		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin', KadeEngineData.gameStyleName);
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logoBl.animation.play('bump');
@@ -165,7 +171,7 @@ class TitleState extends MusicBeatState
 		// logoBl.color = FlxColor.BLACK;
 
 		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
-		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
+		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle', KadeEngineData.gameStyleName);
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.antialiasing = true;
@@ -173,7 +179,7 @@ class TitleState extends MusicBeatState
 		add(logoBl);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
-		titleText.frames = Paths.getSparrowAtlas('titleEnter');
+		titleText.frames = Paths.getSparrowAtlas('titleEnter',KadeEngineData.gameStyleName);
 		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
 		titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
 		titleText.antialiasing = true;
@@ -182,7 +188,7 @@ class TitleState extends MusicBeatState
 		// titleText.screenCenter(X);
 		add(titleText);
 
-		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
+		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo',KadeEngineData.gameStyleName));
 		logo.screenCenter();
 		logo.antialiasing = true;
 		// add(logo);
@@ -218,7 +224,7 @@ class TitleState extends MusicBeatState
 
 	function getIntroTextShit():Array<Array<String>>
 	{
-		var fullText:String = Assets.getText(Paths.txt('introText'));
+		var fullText:String = Assets.getText(Paths.txt('introText',KadeEngineData.gameStyleName));
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];
@@ -283,7 +289,7 @@ class TitleState extends MusicBeatState
 				titleText.animation.play('press');
 
 			FlxG.camera.flash(FlxColor.WHITE, 1);
-			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+			FlxG.sound.play(Paths.sound('confirmMenu',KadeEngineData.gameStyleName), 0.7);
 
 			transitioning = true;
 			// FlxG.sound.music.stop();
@@ -378,9 +384,10 @@ class TitleState extends MusicBeatState
 				createCoolText([curWacky[0]]);
 			// credTextShit.visible = true;
 			case 10:
-				addMoreText(curWacky[1]);
+				if(curWacky[2] != null) { addMoreText(curWacky[1]); }
 			case 11:
-				addMoreText(curWacky[2]);
+				if(curWacky[2] != null) { addMoreText(curWacky[2]); }
+				else { addMoreText(curWacky[1]); }
 			// credTextShit.text += '\nlmao';
 			case 12:
 				deleteCoolText();

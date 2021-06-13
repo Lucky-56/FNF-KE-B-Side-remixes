@@ -18,122 +18,122 @@ class Paths
 		currentLevel = name.toLowerCase();
 	}
 
-	static function getPath(file:String, type:AssetType, library:Null<String>)
+	static function getPath(file:String, type:AssetType, gameStyle:String = "fnf", library:Null<String>)
 	{
 		if (library != null)
-			return getLibraryPath(file, library);
+			return getLibraryPath(file, gameStyle, library);
 
 		if (currentLevel != null)
 		{
-			var levelPath = getLibraryPathForce(file, currentLevel);
+			var levelPath = getLibraryPathForce(file, currentLevel, gameStyle);
 			if (OpenFlAssets.exists(levelPath, type))
 				return levelPath;
 
-			levelPath = getLibraryPathForce(file, "fnf/shared");
+			levelPath = getLibraryPathForce(file, "shared", gameStyle);
 			if (OpenFlAssets.exists(levelPath, type))
 				return levelPath;
 		}
 
-		return getPreloadPath(file);
+		return getPreloadPath(file, gameStyle);
 	}
 
-	static public function getLibraryPath(file:String, library = "fnf/preload")
+	static public function getLibraryPath(file:String, library = "preload", gameStyle:String)
 	{
-		return if (library.endsWith("default") || library.endsWith("preload")) getPreloadPath(file); else getLibraryPathForce(file, library);
+		return if (library == "preload" || library == "default") getPreloadPath(file, gameStyle); else getLibraryPathForce(file, gameStyle, library);
 	}
 
-	inline static function getLibraryPathForce(file:String, library:String)
+	inline static function getLibraryPathForce(file:String, gameStyle:String, library:String)
 	{
-		return KadeEngineData.gameStyleName + '/$library:assets/' + KadeEngineData.gameStyleName + '/$library/$file';
+		return '$gameStyle/$library:assets/$gameStyle/$library/$file';
 	}
 
-	inline static function getPreloadPath(file:String)
+	inline static function getPreloadPath(file:String, gameStyle:String)
 	{
-		return 'assets/' + KadeEngineData.gameStyleName + '/$file';
+		return 'assets/$gameStyle/$file';
 	}
 
-	inline static public function file(file:String, type:AssetType = TEXT, ?library:String)
+	inline static public function file(file:String, gameStyle:String, type:AssetType = TEXT, ?library:String)
 	{
-		return getPath(file, type, library);
+		return getPath(file, type, gameStyle, library);
 	}
 
-	inline static public function lua(key:String,?library:String)
+	inline static public function lua(key:String, gameStyle:String, ?library:String)
 	{
-		return getPath('data/$key.lua', TEXT, library);
+		return getPath('data/$key.lua', TEXT, gameStyle, library);
 	}
 
-	inline static public function luaImage(key:String, ?library:String)
+	inline static public function luaImage(key:String, gameStyle:String, ?library:String)
 	{
-		return getPath('data/$key.png', IMAGE, library);
+		return getPath('data/$key.png', IMAGE, gameStyle, library);
 	}
 
-	inline static public function txt(key:String, ?library:String)
+	inline static public function txt(key:String, gameStyle:String, ?library:String)
 	{
-		return getPath('data/$key.txt', TEXT, library);
+		return getPath('data/$key.txt', TEXT, gameStyle, library);
 	}
 
-	inline static public function xml(key:String, ?library:String)
+	inline static public function xml(key:String, gameStyle:String, ?library:String)
 	{
-		return getPath('data/$key.xml', TEXT, library);
+		return getPath('data/$key.xml', TEXT, gameStyle, library);
 	}
 
-	inline static public function json(key:String, ?library:String)
+	inline static public function json(key:String, gameStyle:String, ?library:String)
 	{
-		return getPath('data/$key.json', TEXT, library);
+		return getPath('data/$key.json', TEXT, gameStyle, library);
 	}
 
-	static public function sound(key:String, ?library:String)
+	static public function sound(key:String, gameStyle:String, ?library:String)
 	{
-		return getPath('sounds/$key.$SOUND_EXT', SOUND, library);
+		return getPath('sounds/$key.$SOUND_EXT', SOUND, gameStyle, library);
 	}
 
-	inline static public function soundRandom(key:String, min:Int, max:Int, ?library:String)
+	inline static public function soundRandom(key:String, min:Int, max:Int, gameStyle:String, ?library:String)
 	{
-		return sound(key + FlxG.random.int(min, max), library);
+		return sound(key + FlxG.random.int(min, max), gameStyle, library);
 	}
 
-	inline static public function music(key:String, ?library:String)
+	inline static public function music(key:String, gameStyle:String, ?library:String)
 	{
-		return getPath('music/$key.$SOUND_EXT', MUSIC, library);
+		return getPath('music/$key.$SOUND_EXT', MUSIC, gameStyle, library);
 	}
 
-	inline static public function voices(song:String)
-	{
-		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
-			switch (songLowercase) {
-				case 'dad-battle': songLowercase = 'dadbattle';
-				case 'philly-nice': songLowercase = 'philly';
-			}
-		return KadeEngineData.gameStyleName + '/songs:assets/' + KadeEngineData.gameStyleName + '/songs/${songLowercase}/Voices.$SOUND_EXT';
-	}
-
-	inline static public function inst(song:String)
+	inline static public function voices(song:String, gameStyle:String)
 	{
 		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
 			switch (songLowercase) {
 				case 'dad-battle': songLowercase = 'dadbattle';
 				case 'philly-nice': songLowercase = 'philly';
 			}
-		return KadeEngineData.gameStyleName + '/songs:assets/' + KadeEngineData.gameStyleName + '/songs/${songLowercase}/Inst.$SOUND_EXT';
+		return '$gameStyle/songs:assets/$gameStyle/songs/${songLowercase}/Voices.$SOUND_EXT';
 	}
 
-	inline static public function image(key:String, ?library:String)
+	inline static public function inst(song:String, gameStyle:String)
 	{
-		return getPath('images/$key.png', IMAGE, library);
+		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
+			switch (songLowercase) {
+				case 'dad-battle': songLowercase = 'dadbattle';
+				case 'philly-nice': songLowercase = 'philly';
+			}
+		return '$gameStyle/songs:assets/$gameStyle/songs/${songLowercase}/Inst.$SOUND_EXT';
 	}
 
-	inline static public function font(key:String)
+	inline static public function image(key:String, gameStyle:String, ?library:String)
 	{
-		return 'assets/' + KadeEngineData.gameStyleName + '/fonts/$key';
+		return getPath('images/$key.png', IMAGE, gameStyle, library);
 	}
 
-	inline static public function getSparrowAtlas(key:String, ?library:String)
+	inline static public function font(key:String, gameStyle:String)
 	{
-		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));
+		return 'assets/$gameStyle/fonts/$key';
 	}
 
-	inline static public function getPackerAtlas(key:String, ?library:String)
+	inline static public function getSparrowAtlas(key:String, gameStyle:String, ?library:String)
 	{
-		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
+		return FlxAtlasFrames.fromSparrow(image(key, gameStyle, library), file('images/$key.xml', gameStyle, library));
+	}
+
+	inline static public function getPackerAtlas(key:String, gameStyle:String, ?library:String)
+	{
+		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, gameStyle, library), file('images/$key.txt', gameStyle, library));
 	}
 }
