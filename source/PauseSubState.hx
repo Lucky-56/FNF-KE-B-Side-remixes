@@ -64,7 +64,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelInfo);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		levelDifficulty.text += "Diffculty: " + CoolUtil.difficultyString();
+		levelDifficulty.text += "Diffculty: " + CoolUtil.difficultyFromInt(PlayState.storyDifficulty).toUpperCase();
 		levelDifficulty.scrollFactor.set();
 		levelDifficulty.setFormat(Paths.font('vcr.ttf',KadeEngineData.gameStyleName), 32);
 		levelDifficulty.updateHitbox();

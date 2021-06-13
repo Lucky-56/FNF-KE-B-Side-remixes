@@ -6,11 +6,13 @@ using StringTools;
 
 class CoolUtil
 {
-	public static var difficultyArray:Array<String> = ['EASIER', "STANDARD", "FLIP"];
+	public static var difficultyArray:Array<String> = ['Easy', "Normal", "Hard"];
+	public static var difficultyArrayBSide:Array<String> = ['Easier', "Standard", "Flip"];
 
-	public static function difficultyString():String
+	public static function difficultyFromInt(difficulty:Int):String
 	{
-		return difficultyArray[PlayState.storyDifficulty];
+		if(KadeEngineData.gameStyleName == 'b-side') { return return difficultyArrayBSide[difficulty]; }
+		else { return return difficultyArray[difficulty]; }
 	}
 
 	public static function coolTextFile(path:String):Array<String>

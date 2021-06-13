@@ -97,9 +97,9 @@ class PlayState extends MusicBeatState
 	// Discord RPC variables
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
-	var detailsText:String = "";
 	var detailsPausedText:String = "";
 	#end
+	var detailsText:String = "";
 
 	private var vocals:FlxSound;
 
@@ -257,15 +257,7 @@ class PlayState extends MusicBeatState
 
 		#if windows
 		// Making difficulty text for Discord Rich Presence.
-		switch (storyDifficulty)
-		{
-			case 0:
-				storyDifficultyText = "Easier";
-			case 1:
-				storyDifficultyText = "Standard";
-			case 2:
-				storyDifficultyText = "Flip";
-		}
+		storyDifficultyText = CoolUtil.difficultyFromInt(storyDifficulty);
 
 		iconRPC = SONG.player2;
 
@@ -957,7 +949,7 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		//add Song Info
-		songInfo = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " B-Side - " + (storyDifficulty == 2 ? "Flip" : storyDifficulty == 1 ? "Standard" : "Easier"), 16);
+		songInfo = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " B-Side - " + CoolUtil.difficultyFromInt(storyDifficulty).toUpperCase(), 16);
 		songInfo.setFormat(Paths.font("vcr.ttf",KadeEngineData.gameStyleName), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		songInfo.scrollFactor.set();
 		add(songInfo);
@@ -1202,34 +1194,36 @@ class PlayState extends MusicBeatState
 		foundIntroOffset = false;
 		var introOffset:Int = 0;
 		
-		if(!FlxG.save.data.disableIntroOffset){
-		// pre lowercasing the song name (startCountdown)
-			var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
-			switch (songLowercase) {
-				case 'dad-battle': songLowercase = 'dadbattle';
-				case 'philly-nice': songLowercase = 'philly';
-			}
-			var songPathTwo = 'assets/' + KadeEngineData.gameStyleName + '/data/' + songLowercase + '/';
-			for(file in sys.FileSystem.readDirectory(songPathTwo))
-			{
-				var pathTwo = haxe.io.Path.join([songPathTwo, file]);
-				if(!sys.FileSystem.isDirectory(pathTwo))
+		#if windows
+			if(!FlxG.save.data.disableIntroOffset){
+			// pre lowercasing the song name (startCountdown)
+				var songLowercase = StringTools.replace(PlayState.SONG.song, " ", "-").toLowerCase();
+				switch (songLowercase) {
+					case 'dad-battle': songLowercase = 'dadbattle';
+					case 'philly-nice': songLowercase = 'philly';
+				}
+				var songPathTwo = 'assets/' + KadeEngineData.gameStyleName + '/data/' + songLowercase + '/';
+				for(file in sys.FileSystem.readDirectory(songPathTwo))
 				{
-					if(pathTwo.endsWith('.introOffset'))
+					var pathTwo = haxe.io.Path.join([songPathTwo, file]);
+					if(!sys.FileSystem.isDirectory(pathTwo))
 					{
-						foundIntroOffset = true;
-						trace('Found introOffset file: ' + pathTwo);
-						introOffset = Std.parseInt(file.substring(0, file.indexOf('.introOffset')));
-						break;
+						if(pathTwo.endsWith('.introOffset'))
+						{
+							foundIntroOffset = true;
+							trace('Found introOffset file: ' + pathTwo);
+							introOffset = Std.parseInt(file.substring(0, file.indexOf('.introOffset')));
+							break;
+						}
 					}
 				}
 			}
-		}
-		if(foundIntroOffset){
-			dad.dance();
-			gf.dance();
-			boyfriend.playAnim('idle');
-		}
+			if(foundIntroOffset){
+				dad.dance();
+				gf.dance();
+				boyfriend.playAnim('idle');
+			}
+		#end
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{

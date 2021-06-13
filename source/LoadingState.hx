@@ -86,7 +86,7 @@ class LoadingState extends MusicBeatState
 			// @:privateAccess
 			// library.pathGroups.set(symbolPath, [library.__cacheBreak(symbolPath)]);
 			var callback = callbacks.add("song:" + path);
-			Assets.loadSound(KadeEngineData.gameStyleName + path).onComplete(function (_) { callback(); });
+			Assets.loadSound(path).onComplete(function (_) { callback(); });
 		}
 	}
 	

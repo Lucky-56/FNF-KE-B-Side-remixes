@@ -109,11 +109,13 @@ class Paths
 
 	inline static public function inst(song:String, gameStyle:String)
 	{
+		trace('getting da Song');
 		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
 			switch (songLowercase) {
 				case 'dad-battle': songLowercase = 'dadbattle';
 				case 'philly-nice': songLowercase = 'philly';
 			}
+		trace(' got da song: $gameStyle/songs:assets/$gameStyle/songs/${songLowercase}/Inst.$SOUND_EXT');
 		return '$gameStyle/songs:assets/$gameStyle/songs/${songLowercase}/Inst.$SOUND_EXT';
 	}
 
