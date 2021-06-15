@@ -4,7 +4,7 @@ import flixel.FlxG;
 class KadeEngineData
 {
 	public static var gameStyleName:String = "fnf";
-	public static var gameStyleTypes:Array<String> = ['fnf', 'b-side'];
+	public static var gameStyleTypes:Array<String> = ['fnf', 'b-side', 'b3'];
 
 	public static function initSave()
 	{
