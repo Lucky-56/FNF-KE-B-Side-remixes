@@ -10,11 +10,9 @@ class Highscore
 	public static var songScores:Map<String, Int> = new Map<String, Int>();
 	#end
 
-
 	public static function saveScore(song:String, score:Int = 0, ?diff:Int = 0):Void
 	{
 		var daSong:String = formatSong(song, diff);
-
 
 		#if !switch
 		NGio.postScore(score, song);
@@ -22,13 +20,13 @@ class Highscore
 
 		if(!FlxG.save.data.botplay)
 		{
-			if (songScores.exists(daSong))
+			if (songScores.exists(KadeEngineData.gameStyleName + '_' + daSong))
 			{
-				if (songScores.get(daSong) < score)
-					setScore(daSong, score);
+				if (songScores.get(KadeEngineData.gameStyleName + '_' + daSong) < score)
+					setScore(KadeEngineData.gameStyleName + '_' + daSong, score);
 			}
 			else
-				setScore(daSong, score);
+				setScore(KadeEngineData.gameStyleName + '_' + daSong, score);
 		}else trace('BotPlay detected. Score saving is disabled.');
 	}
 
@@ -43,13 +41,13 @@ class Highscore
 		{
 			var daWeek:String = formatSong('week' + week, diff);
 
-			if (songScores.exists(daWeek))
+			if (songScores.exists(KadeEngineData.gameStyleName + '_' + daWeek))
 			{
-				if (songScores.get(daWeek) < score)
-					setScore(daWeek, score);
+				if (songScores.get(KadeEngineData.gameStyleName + '_' + daWeek) < score)
+					setScore(KadeEngineData.gameStyleName + '_' + daWeek, score);
 			}
 			else
-				setScore(daWeek, score);
+				setScore(KadeEngineData.gameStyleName + '_' + daWeek, score);
 		}else trace('BotPlay detected. Score saving is disabled.');
 	}
 
@@ -78,18 +76,22 @@ class Highscore
 
 	public static function getScore(song:String, diff:Int):Int
 	{
-		if (!songScores.exists(formatSong(song, diff)))
-			setScore(formatSong(song, diff), 0);
+		var daSong:String = formatSong(song, diff);
 
-		return songScores.get(formatSong(song, diff));
+		if (!songScores.exists(KadeEngineData.gameStyleName + '_' + daSong))
+			setScore(KadeEngineData.gameStyleName + '_' + daSong, 0);
+
+		return songScores.get(KadeEngineData.gameStyleName + '_' + daSong);
 	}
 
 	public static function getWeekScore(week:Int, diff:Int):Int
 	{
-		if (!songScores.exists(formatSong('week' + week, diff)))
-			setScore(formatSong('week' + week, diff), 0);
+		var daWeek:String = formatSong('week' + week, diff);
 
-		return songScores.get(formatSong('week' + week, diff));
+		if (!songScores.exists(KadeEngineData.gameStyleName + '_' + daWeek))
+			setScore(KadeEngineData.gameStyleName + '_' + daWeek, 0);
+
+		return songScores.get(KadeEngineData.gameStyleName + '_' + daWeek);
 	}
 
 	public static function load():Void

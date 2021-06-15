@@ -794,8 +794,6 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 		}
 
-
-		
 		boyfriend = new Boyfriend(770, 450, SONG.player1);
 
 		// REPOSITIONING PER STAGE
@@ -1202,7 +1200,7 @@ class PlayState extends MusicBeatState
 					case 'dad-battle': songLowercase = 'dadbattle';
 					case 'philly-nice': songLowercase = 'philly';
 				}
-				var songPathTwo = 'assets/' + KadeEngineData.gameStyleName + '/data/' + songLowercase + '/';
+				var songPathTwo = 'assets/data/' + KadeEngineData.gameStyleName + '/' + songLowercase + '/';
 				for(file in sys.FileSystem.readDirectory(songPathTwo))
 				{
 					var pathTwo = haxe.io.Path.join([songPathTwo, file]);
@@ -1431,7 +1429,7 @@ class PlayState extends MusicBeatState
 			}
 		// Per song offset check
 		#if windows
-			var songPath = 'assets/' + KadeEngineData.gameStyleName + '/data/' + songLowercase + '/';
+			var songPath = 'assets/data/' + KadeEngineData.gameStyleName + '/' + songLowercase + '/';
 			
 			for(file in sys.FileSystem.readDirectory(songPath))
 			{
@@ -2998,7 +2996,9 @@ class PlayState extends MusicBeatState
 						}
 					});
 
+					#if final
 					trace('\nCURRENT LINE:\n' + directionsAccounted);
+					#end
 		 
 					for (note in dumbNotes)
 					{

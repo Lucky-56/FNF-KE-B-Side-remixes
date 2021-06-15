@@ -147,11 +147,15 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-			if (controls.UP_P)
-				{ changeItem(-1); }
+			if (controls.UP_P) {
+				FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
+				 changeItem(-1);
+			}
 
-			if (controls.DOWN_P)
-				{ changeItem(1); }
+			if (controls.DOWN_P) {
+				FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
+				 changeItem(1);
+			}
 
 			if (controls.LEFT_P && optionShit[curSelected] == 'story mode')
 				{ changeGameStyle(-1); }
@@ -241,7 +245,6 @@ class MainMenuState extends MusicBeatState
 			if (curSelected < 0)
 				curSelected = menuItems.length - 1;
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{

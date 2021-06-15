@@ -82,11 +82,6 @@ class TitleState extends MusicBeatState
 		trace('KadeEngineData said:');
 		KadeEngineData.initSave();
 
-		#if sys
-		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/" + KadeEngineData.gameStyleName + "/replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/" + KadeEngineData.gameStyleName + "/replays");
-		#end
-
 		Highscore.load();
 
 		if (FlxG.save.data.weekUnlocked != null)

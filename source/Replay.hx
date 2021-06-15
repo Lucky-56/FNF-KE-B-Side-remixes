@@ -68,17 +68,17 @@ class Replay
         var data:String = Json.stringify(json);
 
         #if sys
-        File.saveContent("assets/" + KadeEngineData.gameStyleName + "/replays/replay-" + PlayState.SONG.song + "-time" + Date.now().getTime() + ".kadeReplay", data);
+        File.saveContent("assets/replays/" + KadeEngineData.gameStyleName + "/replay-" + PlayState.SONG.song + "-time" + Date.now().getTime() + ".kadeReplay", data);
         #end
     }
 
     public function LoadFromJSON()
     {
         #if sys
-        trace('loading ' + Sys.getCwd() + 'assets/' + KadeEngineData.gameStyleName + '/replays/' + path + ' replay...');
+        trace('loading ' + Sys.getCwd() + 'assets/replays/' + KadeEngineData.gameStyleName + '/' + path + ' replay...');
         try
         {
-            var repl:ReplayJSON = cast Json.parse(File.getContent(Sys.getCwd() + "assets/" + KadeEngineData.gameStyleName + "/replays/" + path));
+            var repl:ReplayJSON = cast Json.parse(File.getContent(Sys.getCwd() + "assets/replays/" + KadeEngineData.gameStyleName + "/" + path));
             replay = repl;
         }
         catch(e)

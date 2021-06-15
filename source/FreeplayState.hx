@@ -167,7 +167,6 @@ class FreeplayState extends MusicBeatState
 
 		if (FlxG.sound.music.volume < 0.7)
 		{
-			trace("no I can't... I'm gonna make it louder. k?");
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 
@@ -280,9 +279,7 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		#if PRELOAD_ALL
-		trace("I'm gonna start your song");
 		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName,KadeEngineData.gameStyleName), 0);
-		trace('can you hear it?');
 		#end
 
 		var bullShit:Int = 0;

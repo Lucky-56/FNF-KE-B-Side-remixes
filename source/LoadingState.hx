@@ -79,7 +79,7 @@ class LoadingState extends MusicBeatState
 	{
 		if (!Assets.cache.hasSound(path))
 		{
-			var library = Assets.getLibrary(KadeEngineData.gameStyleName + "/songs");
+			var library = Assets.getLibrary("songs");
 			final symbolPath = path.split(":").pop();
 			// @:privateAccess
 			// library.types.set(symbolPath, SOUND);
@@ -92,15 +92,15 @@ class LoadingState extends MusicBeatState
 	
 	function checkLibrary(library:String)
 	{
-		trace(Assets.hasLibrary(KadeEngineData.gameStyleName + library));
-		if (Assets.getLibrary(KadeEngineData.gameStyleName + library) == null)
+		trace(Assets.hasLibrary(library));
+		if (Assets.getLibrary(library) == null)
 		{
 			@:privateAccess
-			if (!LimeAssets.libraryPaths.exists(KadeEngineData.gameStyleName + library))
+			if (!LimeAssets.libraryPaths.exists(library))
 				throw "Missing library: " + library;
 			
 			var callback = callbacks.add("library:" + library);
-			Assets.loadLibrary(KadeEngineData.gameStyleName + library).onComplete(function (_) { callback(); });
+			Assets.loadLibrary(library).onComplete(function (_) { callback(); });
 		}
 	}
 	
@@ -169,12 +169,12 @@ class LoadingState extends MusicBeatState
 	#if NO_PRELOAD_ALL
 	static function isSoundLoaded(path:String):Bool
 	{
-		return Assets.cache.hasSound(KadeEngineData.gameStyleName + path);
+		return Assets.cache.hasSound(path);
 	}
 	
 	static function isLibraryLoaded(library:String):Bool
 	{
-		return Assets.getLibrary(KadeEngineData.gameStyleName + library) != null;
+		return Assets.getLibrary(library) != null;
 	}
 	#end
 	
@@ -219,7 +219,7 @@ class LoadingState extends MusicBeatState
 				rootPath = Path.directory(path);
 			}
 			@:privateAccess
-			path = LimeAssets.__cacheBreak(KadeEngineData.gameStyleName + path);
+			path = LimeAssets.__cacheBreak(path);
 		}
 
 		AssetManifest.loadFromFile(path, rootPath).onComplete(function(manifest)

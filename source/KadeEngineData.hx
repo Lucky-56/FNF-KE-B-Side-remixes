@@ -104,5 +104,10 @@ class KadeEngineData
 
 		gameStyleName = gameStyleTypes[FlxG.save.data.gameStyle];
 		trace('gameStyle should be ' + FlxG.save.data.gameStyle + ' ' + gameStyleName + ' (gucci)');
+
+		#if sys
+		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/replays/" + gameStyleName))
+			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays/" + gameStyleName);
+		#end
 	}
 }
