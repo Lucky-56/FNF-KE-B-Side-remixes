@@ -38,7 +38,7 @@ class MainMenuState extends MusicBeatState
 	public static var firstStart:Bool = true;
 
 	public static var kadeEngineVer:String = "1.5.2";
-	public static var bSideVer:String = "4.2";
+	public static var remixEngineVer:String = "0.5";
 	public static var gameVer:String = "0.2.7.1";
 
 	var magenta:FlxSprite;
@@ -118,10 +118,14 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		var versionShitTwo:FlxText = new FlxText(5, FlxG.height - 41, 0, "B-Side Remixes - v" + bSideVer, 12);
+		var versionShitTwo:FlxText = new FlxText(5, FlxG.height - 41, 0, "FNF Remixes Engine - v" + remixEngineVer, 12);
 		versionShitTwo.scrollFactor.set();
 		versionShitTwo.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShitTwo);
+		var gameStyleShit:FlxText = new FlxText(5, FlxG.height - 59, 0, KadeEngineData.gameStyleName, 12);
+		gameStyleShit.scrollFactor.set();
+		gameStyleShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(gameStyleShit);
 
 		// NG.core.calls.event.logEvent('swag').send();
 

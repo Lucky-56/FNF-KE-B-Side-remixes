@@ -219,7 +219,7 @@ class TitleState extends MusicBeatState
 
 	function getIntroTextShit():Array<Array<String>>
 	{
-		var fullText:String = Assets.getText(Paths.txt('introText',KadeEngineData.gameStyleName));
+		var fullText:String = Assets.getText(Paths.txt('introText', 'main'));
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];
@@ -365,9 +365,9 @@ class TitleState extends MusicBeatState
 			// credTextShit.text = 'In association \nwith';
 			// credTextShit.screenCenter();
 			case 5:
-				createCoolText(['rozebud', 'jads', 'cval']);
+				createCoolText(['engine customized', 'by']);
 			case 7:
-				addMoreText('remixed');
+				addMoreText('lucky56');
 			// credTextShit.text += '\nNewgrounds';
 			case 8:
 				deleteCoolText();
