@@ -8,7 +8,6 @@ class KadeEngineData
 
 	public static function initSave()
 	{
-		trace('huh');
 		if (FlxG.save.data.newInput == null)
 			FlxG.save.data.newInput = true;
 
@@ -106,7 +105,7 @@ class KadeEngineData
 			FlxG.save.data.gameStyle = 0;
 
 		gameStyleName = gameStyleTypes[FlxG.save.data.gameStyle];
-		trace('gameStyle should be ' + FlxG.save.data.gameStyle + ' ' + gameStyleName + ' (gucci)');
+		trace('gameStyle should be ' + gameStyleName + ' (' + FlxG.save.data.gameStyle + ')');
 
 		#if sys
 		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/replays/" + gameStyleName))
