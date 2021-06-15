@@ -80,9 +80,6 @@ class PlayState extends MusicBeatState
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
 
-	public static var songPosBG:FlxSprite;
-	public static var songPosBar:FlxBar;
-
 	public static var rep:Replay;
 	public static var loadRep:Bool = false;
 
@@ -135,10 +132,17 @@ class PlayState extends MusicBeatState
 	private var totalPlayed:Int = 0;
 	private var ss:Bool = false;
 
-
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
 	private var songPositionBar:Float = 0;
+
+	public static var songPosBG:FlxSprite;
+	public static var songPosBar:FlxBar;
+
+	var healthBarColor:Array<String> = CoolUtil.coolTextFile(Paths.txt('healthBarColors',KadeEngineData.gameStyleName));
+	var songPosBarColor:Array<String> = CoolUtil.coolTextFile(Paths.txt('songPosBarColors',KadeEngineData.gameStyleName));
+
+	var remix:String = Assets.getText(Paths.txt('remixName',KadeEngineData.gameStyleName));
 	
 	private var generatedMusic:Bool = false;
 	private var startingSong:Bool = false;
@@ -276,7 +280,7 @@ class PlayState extends MusicBeatState
 		detailsPausedText = "Paused - " + detailsText;
 
 		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(detailsText + " " + SONG.song + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), "\nAcc: " + HelperFunctions.truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses  , iconRPC);
+		DiscordClient.changePresence(detailsText + " " + SONG.song + (remix == null ? "" : remix) + " (" + storyDifficultyText + ") " + Ratings.GenerateLetterRank(accuracy), "\nAcc: " + HelperFunctions.truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses  , iconRPC);
 		#end
 
 
@@ -920,7 +924,7 @@ class PlayState extends MusicBeatState
 				songPosBar = new FlxBar(songPosBG.x + 4, songPosBG.y + 4, LEFT_TO_RIGHT, Std.int(songPosBG.width - 8), Std.int(songPosBG.height - 8), this,
 					'songPositionBar', 0, 90000);
 				songPosBar.scrollFactor.set();
-				songPosBar.createFilledBar(FlxColor.GRAY, 0xFFEDBC75);
+				songPosBar.createFilledBar(FlxColor.fromString(songPosBarColor[0]), FlxColor.fromString(songPosBarColor[1]));
 				add(songPosBar);
 	
 				var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.song.length * 5),songPosBG.y,0,SONG.song, 16);
@@ -942,12 +946,12 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFFA5AE, 0xFF0BCECE);
+		healthBar.createFilledBar(FlxColor.fromString(healthBarColor[0]), FlxColor.fromString(healthBarColor[1]));
 		// healthBar
 		add(healthBar);
 
 		//add Song Info
-		songInfo = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " B-Side - " + CoolUtil.difficultyFromInt(storyDifficulty).toUpperCase(), 16);
+		songInfo = new FlxText(4,healthBarBG.y + 50,0,SONG.song + (remix == null ? "" : remix) + " - " + CoolUtil.difficultyFromInt(storyDifficulty).toUpperCase(), 16);
 		songInfo.setFormat(Paths.font("vcr.ttf",KadeEngineData.gameStyleName), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		songInfo.scrollFactor.set();
 		add(songInfo);
@@ -1363,7 +1367,7 @@ class PlayState extends MusicBeatState
 				'songPositionBar', 0, songLength - 1000);
 			songPosBar.numDivisions = 1000;
 			songPosBar.scrollFactor.set();
-			songPosBar.createFilledBar(FlxColor.GRAY, 0xFFEDBC75);
+			songPosBar.createFilledBar(FlxColor.fromString(songPosBarColor[0]), FlxColor.fromString(songPosBarColor[1]));
 			add(songPosBar);
 
 			var songName = new FlxText(songPosBG.x + (songPosBG.width / 2) - (SONG.song.length * 5),songPosBG.y,0,SONG.song, 16);

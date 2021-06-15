@@ -1,0 +1,2 @@
+GRAY
+0xFFEDBC75

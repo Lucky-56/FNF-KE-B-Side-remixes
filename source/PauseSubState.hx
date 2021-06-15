@@ -1,5 +1,6 @@
 package;
 
+import lime.utils.Assets;
 import openfl.Lib;
 #if windows
 import llua.Lua;
@@ -30,6 +31,7 @@ class PauseSubState extends MusicBeatSubstate
 	var offsetChanged:Bool = false;
 	
 	static var detailsText:String = "";
+	var remix:String = Assets.getText(Paths.txt('remixName',KadeEngineData.gameStyleName));
 
 	public function new(x:Float, y:Float)
 	{
@@ -57,7 +59,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(gameInfo);
 
 		var levelInfo:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
-		levelInfo.text += "Song: " + PlayState.SONG.song;
+		levelInfo.text += "Song: " + PlayState.SONG.song + (remix == null ? "" : remix);
 		levelInfo.scrollFactor.set();
 		levelInfo.setFormat(Paths.font("vcr.ttf",KadeEngineData.gameStyleName), 32);
 		levelInfo.updateHitbox();

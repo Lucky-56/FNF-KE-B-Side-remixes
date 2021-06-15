@@ -23,10 +23,10 @@ class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
 
-	var weekData:Array<Dynamic> = [
+	var weekData:Array<Array<String>> = [
 		['Tutorial'],
 		['Bopeebo', 'Fresh', 'Dad Battle'],
-		['Spookeez', 'South'],
+		['Spookeez', 'South', 'Monster'],
 		['Pico', 'Philly Nice', "Blammed"],
 		['Satin Panties', "High", "Milf"],
 		['Cocoa', 'Eggnog', 'Winter Horrorland'],
@@ -36,7 +36,7 @@ class StoryMenuState extends MusicBeatState
 
 	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true];
 
-	var weekCharacters:Array<Dynamic> = [
+	var weekCharacters:Array<Array<String>> = [
 		['', 'bf', 'gf'],
 		['dad', 'bf', 'gf'],
 		['spooky', 'bf', 'gf'],
@@ -118,6 +118,19 @@ class StoryMenuState extends MusicBeatState
 		add(grpLocks);
 
 		trace("Line 70");
+
+		// TODO: find a way to load this as a txt
+		if(KadeEngineData.gameStyleName == 'b-side') {
+			weekData = [
+				['Tutorial'],
+				['Bopeebo', 'Fresh', 'Dad Battle'],
+				['Spookeez', 'South'],
+				['Pico', 'Philly Nice', "Blammed"],
+				['Satin Panties', "High", "Milf"],
+				['Cocoa', 'Eggnog', 'Winter Horrorland'],
+				['Senpai', 'Roses', 'Thorns']
+			];
+		}
 
 		for (i in 0...weekData.length)
 		{
@@ -281,6 +294,19 @@ class StoryMenuState extends MusicBeatState
 				stopspamming = true;
 			}
 
+			// TODO: find a way to load this as a txt
+			if(KadeEngineData.gameStyleName == 'b-side') {
+				weekData = [
+					['Tutorial'],
+					['Bopeebo', 'Fresh', 'Dad Battle'],
+					['Spookeez', 'South'],
+					['Pico', 'Philly Nice', "Blammed"],
+					['Satin Panties', "High", "Milf"],
+					['Cocoa', 'Eggnog', 'Winter Horrorland'],
+					['Senpai', 'Roses', 'Thorns']
+				];
+			}
+	
 			PlayState.storyPlaylist = weekData[curWeek];
 			PlayState.isStoryMode = true;
 			selectedWeek = true;
@@ -351,6 +377,19 @@ class StoryMenuState extends MusicBeatState
 	{
 		curWeek += change;
 
+		// TODO: find a way to load this as a txt
+		if(KadeEngineData.gameStyleName == 'b-side') {
+			weekData = [
+				['Tutorial'],
+				['Bopeebo', 'Fresh', 'Dad Battle'],
+				['Spookeez', 'South'],
+				['Pico', 'Philly Nice', "Blammed"],
+				['Satin Panties', "High", "Milf"],
+				['Cocoa', 'Eggnog', 'Winter Horrorland'],
+				['Senpai', 'Roses', 'Thorns']
+			];
+		}
+
 		if (curWeek >= weekData.length)
 			curWeek = 0;
 		if (curWeek < 0)
@@ -380,6 +419,20 @@ class StoryMenuState extends MusicBeatState
 		grpWeekCharacters.members[2].setCharacter(weekCharacters[curWeek][2]);
 
 		txtTracklist.text = "Tracks\n";
+
+		// TODO: find a way to load this as a txt
+		if(KadeEngineData.gameStyleName == 'b-side') {
+			weekData = [
+				['Tutorial'],
+				['Bopeebo', 'Fresh', 'Dad Battle'],
+				['Spookeez', 'South'],
+				['Pico', 'Philly Nice', "Blammed"],
+				['Satin Panties', "High", "Milf"],
+				['Cocoa', 'Eggnog', 'Winter Horrorland'],
+				['Senpai', 'Roses', 'Thorns']
+			];
+		}
+
 		var stringThing:Array<String> = weekData[curWeek];
 
 		for (i in stringThing)
