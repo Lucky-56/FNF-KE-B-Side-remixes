@@ -18,7 +18,7 @@ class Highscore
 		NGio.postScore(score, song);
 		#end
 
-		if(!FlxG.save.data.botplay)
+		if (!FlxG.save.data.botplay)
 		{
 			if (songScores.exists(KadeEngineData.gameStyleName + '_' + daSong))
 			{
@@ -27,17 +27,18 @@ class Highscore
 			}
 			else
 				setScore(KadeEngineData.gameStyleName + '_' + daSong, score);
-		}else trace('BotPlay detected. Score saving is disabled.');
+		}
+		else
+			trace('BotPlay detected. Score saving is disabled.');
 	}
 
 	public static function saveWeekScore(week:Int = 1, score:Int = 0, ?diff:Int = 0):Void
 	{
-
 		#if !switch
 		NGio.postScore(score, "Week " + week);
 		#end
 
-		if(!FlxG.save.data.botplay)
+		if (!FlxG.save.data.botplay)
 		{
 			var daWeek:String = formatSong('week' + week, diff);
 
@@ -48,7 +49,9 @@ class Highscore
 			}
 			else
 				setScore(KadeEngineData.gameStyleName + '_' + daWeek, score);
-		}else trace('BotPlay detected. Score saving is disabled.');
+		}
+		else
+			trace('BotPlay detected. Score saving is disabled.');
 	}
 
 	/**

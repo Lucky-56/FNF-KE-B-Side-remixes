@@ -23,11 +23,9 @@ import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
-
 #if windows
 import Discord.DiscordClient;
 #end
-
 #if cpp
 import sys.thread.Thread;
 #end
@@ -59,9 +57,10 @@ class TitleState extends MusicBeatState
 		#if windows
 		DiscordClient.initialize();
 
-		Application.current.onExit.add (function (exitCode) {
+		Application.current.onExit.add(function(exitCode)
+		{
 			DiscordClient.shutdown();
-		 });
+		});
 		#end
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
@@ -139,7 +138,7 @@ class TitleState extends MusicBeatState
 			// music.loadStream(Paths.music('freakyMenu'));
 			// FlxG.sound.list.add(music);
 			// music.play();
-			FlxG.sound.playMusic(Paths.music('freakyMenu',KadeEngineData.gameStyleName), 0);
+			FlxG.sound.playMusic(Paths.music('freakyMenu', KadeEngineData.gameStyleName), 0);
 
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
@@ -147,11 +146,13 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
-		if(KadeEngineData.gameStyleName != 'b-side')
+		if (KadeEngineData.gameStyleName != 'b-side')
 		{
 			var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 			add(bg);
-		} else {
+		}
+		else
+		{
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('bg', KadeEngineData.gameStyleName));
 			add(bg);
 		}
@@ -174,7 +175,7 @@ class TitleState extends MusicBeatState
 		add(logoBl);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
-		titleText.frames = Paths.getSparrowAtlas('titleEnter',KadeEngineData.gameStyleName);
+		titleText.frames = Paths.getSparrowAtlas('titleEnter', KadeEngineData.gameStyleName);
 		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
 		titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
 		titleText.antialiasing = true;
@@ -183,7 +184,7 @@ class TitleState extends MusicBeatState
 		// titleText.screenCenter(X);
 		add(titleText);
 
-		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo',KadeEngineData.gameStyleName));
+		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo', KadeEngineData.gameStyleName));
 		logo.screenCenter();
 		logo.antialiasing = true;
 		// add(logo);
@@ -284,7 +285,7 @@ class TitleState extends MusicBeatState
 				titleText.animation.play('press');
 
 			FlxG.camera.flash(FlxColor.WHITE, 1);
-			FlxG.sound.play(Paths.sound('confirmMenu',KadeEngineData.gameStyleName), 0.7);
+			FlxG.sound.play(Paths.sound('confirmMenu', KadeEngineData.gameStyleName), 0.7);
 
 			transitioning = true;
 			// FlxG.sound.music.stop();
@@ -379,10 +380,19 @@ class TitleState extends MusicBeatState
 				createCoolText([curWacky[0]]);
 			// credTextShit.visible = true;
 			case 10:
-				if(curWacky[2] != null) { addMoreText(curWacky[1]); }
+				if (curWacky[2] != null)
+				{
+					addMoreText(curWacky[1]);
+				}
 			case 11:
-				if(curWacky[2] != null) { addMoreText(curWacky[2]); }
-				else { addMoreText(curWacky[1]); }
+				if (curWacky[2] != null)
+				{
+					addMoreText(curWacky[2]);
+				}
+				else
+				{
+					addMoreText(curWacky[1]);
+				}
 			// credTextShit.text += '\nlmao';
 			case 12:
 				deleteCoolText();

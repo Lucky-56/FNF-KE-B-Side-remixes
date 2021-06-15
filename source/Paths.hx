@@ -39,7 +39,8 @@ class Paths
 
 	static public function getLibraryPath(folder:String, file:String, gameStyle:String, library = "preload")
 	{
-		return if (library == "preload" || library == "default") getPreloadPath(folder, file, gameStyle); else getLibraryPathForce(folder, file, gameStyle, library);
+		return if (library == "preload" || library == "default") getPreloadPath(folder, file,
+			gameStyle); else getLibraryPathForce(folder, file, gameStyle, library);
 	}
 
 	inline static function getLibraryPathForce(folder:String, file:String, gameStyle:String, library:String)
@@ -100,20 +101,26 @@ class Paths
 	inline static public function voices(song:String, gameStyle:String)
 	{
 		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
-			switch (songLowercase) {
-				case 'dad-battle': songLowercase = 'dadbattle';
-				case 'philly-nice': songLowercase = 'philly';
-			}
+		switch (songLowercase)
+		{
+			case 'dad-battle':
+				songLowercase = 'dadbattle';
+			case 'philly-nice':
+				songLowercase = 'philly';
+		}
 		return 'songs:assets/songs/$gameStyle/${songLowercase}/Voices.$SOUND_EXT';
 	}
 
 	inline static public function inst(song:String, gameStyle:String)
 	{
 		var songLowercase = StringTools.replace(song, " ", "-").toLowerCase();
-			switch (songLowercase) {
-				case 'dad-battle': songLowercase = 'dadbattle';
-				case 'philly-nice': songLowercase = 'philly';
-			}
+		switch (songLowercase)
+		{
+			case 'dad-battle':
+				songLowercase = 'dadbattle';
+			case 'philly-nice':
+				songLowercase = 'philly';
+		}
 		return 'songs:assets/songs/$gameStyle/${songLowercase}/Inst.$SOUND_EXT';
 	}
 

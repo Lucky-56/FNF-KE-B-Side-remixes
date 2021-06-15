@@ -9,8 +9,6 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
-
-
 #if windows
 import Discord.DiscordClient;
 #end
@@ -37,7 +35,7 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist',KadeEngineData.gameStyleName));
+		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist', KadeEngineData.gameStyleName));
 
 		for (i in 0...initSonglist.length)
 		{
@@ -53,10 +51,10 @@ class FreeplayState extends MusicBeatState
 			}
 		 */
 
-		 #if windows
-		 // Updating Discord Rich Presence
-		 DiscordClient.changePresence("In the Freeplay Menu", null);
-		 #end
+		#if windows
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("In the Freeplay Menu", null);
+		#end
 
 		var isDebug:Bool = false;
 
@@ -68,7 +66,7 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue',KadeEngineData.gameStyleName));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue', KadeEngineData.gameStyleName));
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -95,7 +93,7 @@ class FreeplayState extends MusicBeatState
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		// scoreText.autoSize = false;
-		scoreText.setFormat(Paths.font("vcr.ttf",KadeEngineData.gameStyleName), 32, FlxColor.WHITE, RIGHT);
+		scoreText.setFormat(Paths.font("vcr.ttf", KadeEngineData.gameStyleName), 32, FlxColor.WHITE, RIGHT);
 		// scoreText.alignment = RIGHT;
 
 		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
@@ -204,17 +202,20 @@ class FreeplayState extends MusicBeatState
 		{
 			// adjusting the song name to be compatible
 			var songFormat = StringTools.replace(songs[curSelected].songName, " ", "-");
-			switch (songFormat) {
-				case 'Dad-Battle': songFormat = 'Dadbattle';
-				case 'Philly-Nice': songFormat = 'Philly';
+			switch (songFormat)
+			{
+				case 'Dad-Battle':
+					songFormat = 'Dadbattle';
+				case 'Philly-Nice':
+					songFormat = 'Philly';
 			}
-			
+
 			trace(songs[curSelected].songName);
 
 			var poop:String = Highscore.formatSong(songFormat, curDifficulty);
 
 			trace(poop);
-			
+
 			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName);
 			PlayState.isStoryMode = false;
 			PlayState.storyDifficulty = curDifficulty;
@@ -235,11 +236,14 @@ class FreeplayState extends MusicBeatState
 
 		// adjusting the highscore song name to be compatible (changeDiff)
 		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
-		switch (songHighscore) {
-			case 'Dad-Battle': songHighscore = 'Dadbattle';
-			case 'Philly-Nice': songHighscore = 'Philly';
+		switch (songHighscore)
+		{
+			case 'Dad-Battle':
+				songHighscore = 'Dadbattle';
+			case 'Philly-Nice':
+				songHighscore = 'Philly';
 		}
-		
+
 		#if !switch
 		intendedScore = Highscore.getScore(songHighscore, curDifficulty);
 		#end
@@ -254,7 +258,7 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		// NGio.logEvent('Fresh');
-		FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName), 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu', KadeEngineData.gameStyleName), 0.4);
 
 		curSelected += change;
 
@@ -264,13 +268,16 @@ class FreeplayState extends MusicBeatState
 			curSelected = 0;
 
 		// selector.y = (70 * curSelected) + 30;
-		
+
 		// adjusting the highscore song name to be compatible (changeSelection)
 		// would read original scores if we didn't change packages
 		var songHighscore = StringTools.replace(songs[curSelected].songName, " ", "-");
-		switch (songHighscore) {
-			case 'Dad-Battle': songHighscore = 'Dadbattle';
-			case 'Philly-Nice': songHighscore = 'Philly';
+		switch (songHighscore)
+		{
+			case 'Dad-Battle':
+				songHighscore = 'Dadbattle';
+			case 'Philly-Nice':
+				songHighscore = 'Philly';
 		}
 
 		#if !switch
@@ -279,7 +286,7 @@ class FreeplayState extends MusicBeatState
 		#end
 
 		#if PRELOAD_ALL
-		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName,KadeEngineData.gameStyleName), 0);
+		FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName, KadeEngineData.gameStyleName), 0);
 		#end
 
 		var bullShit:Int = 0;

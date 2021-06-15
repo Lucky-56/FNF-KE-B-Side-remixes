@@ -14,7 +14,6 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
-
 #if windows
 import Discord.DiscordClient;
 #end
@@ -35,6 +34,7 @@ class MainMenuState extends MusicBeatState
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
+
 	public static var firstStart:Bool = true;
 
 	public static var kadeEngineVer:String = "1.5.2";
@@ -43,6 +43,7 @@ class MainMenuState extends MusicBeatState
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
+
 	public static var finishedFunnyMove:Bool = false;
 
 	override function create()
@@ -54,12 +55,12 @@ class MainMenuState extends MusicBeatState
 
 		if (!FlxG.sound.music.playing)
 		{
-			FlxG.sound.playMusic(Paths.music('freakyMenu',KadeEngineData.gameStyleName));
+			FlxG.sound.playMusic(Paths.music('freakyMenu', KadeEngineData.gameStyleName));
 		}
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('menuBG',KadeEngineData.gameStyleName));
+		var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('menuBG', KadeEngineData.gameStyleName));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.10;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
@@ -71,7 +72,7 @@ class MainMenuState extends MusicBeatState
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat',KadeEngineData.gameStyleName));
+		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat', KadeEngineData.gameStyleName));
 		magenta.scrollFactor.x = 0;
 		magenta.scrollFactor.y = 0.10;
 		magenta.setGraphicSize(Std.int(magenta.width * 1.1));
@@ -86,7 +87,7 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets',KadeEngineData.gameStyleName);
+		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets', KadeEngineData.gameStyleName);
 
 		for (i in 0...optionShit.length)
 		{
@@ -101,11 +102,14 @@ class MainMenuState extends MusicBeatState
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
 			if (firstStart)
-				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
-					{ 
-						finishedFunnyMove = true; 
+				FlxTween.tween(menuItem, {y: 60 + (i * 160)}, 1 + (i * 0.25), {
+					ease: FlxEase.expoInOut,
+					onComplete: function(flxTween:FlxTween)
+					{
+						finishedFunnyMove = true;
 						changeItem();
-					}});
+					}
+				});
 			else
 				menuItem.y = 60 + (i * 160);
 		}
@@ -129,7 +133,6 @@ class MainMenuState extends MusicBeatState
 
 		// NG.core.calls.event.logEvent('swag').send();
 
-
 		if (FlxG.save.data.dfjk)
 			controls.setKeyboardScheme(KeyboardScheme.Solo, true);
 		else
@@ -151,30 +154,38 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-			if (controls.UP_P) {
-				FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
-				 changeItem(-1);
+			if (controls.UP_P)
+			{
+				FlxG.sound.play(Paths.sound('scrollMenu', KadeEngineData.gameStyleName));
+				changeItem(-1);
 			}
 
-			if (controls.DOWN_P) {
-				FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
-				 changeItem(1);
+			if (controls.DOWN_P)
+			{
+				FlxG.sound.play(Paths.sound('scrollMenu', KadeEngineData.gameStyleName));
+				changeItem(1);
 			}
 
 			if (controls.LEFT_P && optionShit[curSelected] == 'story mode')
-				{ changeGameStyle(-1); }
+			{
+				changeGameStyle(-1);
+			}
 
 			if (controls.RIGHT_P && optionShit[curSelected] == 'story mode')
-				{ changeGameStyle(1); }
+			{
+				changeGameStyle(1);
+			}
 
 			if (controls.BACK)
-				{ FlxG.switchState(new TitleState()); }
+			{
+				FlxG.switchState(new TitleState());
+			}
 
 			if (controls.ACCEPT)
 			{
 				selectedSomethin = true;
-				FlxG.sound.play(Paths.sound('confirmMenu',KadeEngineData.gameStyleName));
-				
+				FlxG.sound.play(Paths.sound('confirmMenu', KadeEngineData.gameStyleName));
+
 				if (FlxG.save.data.flashing)
 					FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
@@ -218,7 +229,7 @@ class MainMenuState extends MusicBeatState
 			spr.screenCenter(X);
 		});
 	}
-	
+
 	function goToState()
 	{
 		var daChoice:String = optionShit[curSelected];
@@ -276,7 +287,7 @@ class MainMenuState extends MusicBeatState
 				FlxG.save.data.gameStyle = KadeEngineData.gameStyleTypes.length - 1;
 		}
 		KadeEngineData.initGamemode();
-		FlxG.sound.playMusic(Paths.music('freakyMenu',KadeEngineData.gameStyleName));
+		FlxG.sound.playMusic(Paths.music('freakyMenu', KadeEngineData.gameStyleName));
 
 		create();
 	}

@@ -12,7 +12,6 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
-
 #if windows
 import Discord.DiscordClient;
 #end
@@ -85,7 +84,7 @@ class StoryMenuState extends MusicBeatState
 		if (FlxG.sound.music != null)
 		{
 			if (!FlxG.sound.music.playing)
-				FlxG.sound.playMusic(Paths.music('freakyMenu',KadeEngineData.gameStyleName));
+				FlxG.sound.playMusic(Paths.music('freakyMenu', KadeEngineData.gameStyleName));
 		}
 
 		persistentUpdate = persistentDraw = true;
@@ -99,11 +98,11 @@ class StoryMenuState extends MusicBeatState
 
 		var rankText:FlxText = new FlxText(0, 10);
 		rankText.text = 'RANK: GREAT';
-		rankText.setFormat(Paths.font("vcr.ttf",KadeEngineData.gameStyleName), 32);
+		rankText.setFormat(Paths.font("vcr.ttf", KadeEngineData.gameStyleName), 32);
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
 
-		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets',KadeEngineData.gameStyleName);
+		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets', KadeEngineData.gameStyleName);
 		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFFF9CF51);
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
@@ -120,7 +119,8 @@ class StoryMenuState extends MusicBeatState
 		trace("Line 70");
 
 		// TODO: find a way to load this as a txt
-		if(KadeEngineData.gameStyleName == 'b-side') {
+		if (KadeEngineData.gameStyleName == 'b-side')
+		{
 			weekData = [
 				['Tutorial'],
 				['Bopeebo', 'Fresh', 'Dad Battle'],
@@ -269,7 +269,7 @@ class StoryMenuState extends MusicBeatState
 
 		if (controls.BACK && !movedBack && !selectedWeek)
 		{
-			FlxG.sound.play(Paths.sound('cancelMenu',KadeEngineData.gameStyleName));
+			FlxG.sound.play(Paths.sound('cancelMenu', KadeEngineData.gameStyleName));
 			movedBack = true;
 			FlxG.switchState(new MainMenuState());
 		}
@@ -287,7 +287,7 @@ class StoryMenuState extends MusicBeatState
 		{
 			if (stopspamming == false)
 			{
-				FlxG.sound.play(Paths.sound('confirmMenu',KadeEngineData.gameStyleName));
+				FlxG.sound.play(Paths.sound('confirmMenu', KadeEngineData.gameStyleName));
 
 				grpWeekText.members[curWeek].startFlashing();
 				grpWeekCharacters.members[1].animation.play('bfConfirm');
@@ -295,7 +295,8 @@ class StoryMenuState extends MusicBeatState
 			}
 
 			// TODO: find a way to load this as a txt
-			if(KadeEngineData.gameStyleName == 'b-side') {
+			if (KadeEngineData.gameStyleName == 'b-side')
+			{
 				weekData = [
 					['Tutorial'],
 					['Bopeebo', 'Fresh', 'Dad Battle'],
@@ -306,19 +307,21 @@ class StoryMenuState extends MusicBeatState
 					['Senpai', 'Roses', 'Thorns']
 				];
 			}
-	
+
 			PlayState.storyPlaylist = weekData[curWeek];
 			PlayState.isStoryMode = true;
 			selectedWeek = true;
-
 
 			PlayState.storyDifficulty = curDifficulty;
 
 			// adjusting the song name to be compatible
 			var songFormat = StringTools.replace(PlayState.storyPlaylist[0], " ", "-");
-			switch (songFormat) {
-				case 'Dad-Battle': songFormat = 'Dadbattle';
-				case 'Philly-Nice': songFormat = 'Philly';
+			switch (songFormat)
+			{
+				case 'Dad-Battle':
+					songFormat = 'Dadbattle';
+				case 'Philly-Nice':
+					songFormat = 'Philly';
 			}
 
 			var poop:String = Highscore.formatSong(songFormat, curDifficulty);
@@ -378,7 +381,8 @@ class StoryMenuState extends MusicBeatState
 		curWeek += change;
 
 		// TODO: find a way to load this as a txt
-		if(KadeEngineData.gameStyleName == 'b-side') {
+		if (KadeEngineData.gameStyleName == 'b-side')
+		{
 			weekData = [
 				['Tutorial'],
 				['Bopeebo', 'Fresh', 'Dad Battle'],
@@ -407,7 +411,7 @@ class StoryMenuState extends MusicBeatState
 			bullShit++;
 		}
 
-		FlxG.sound.play(Paths.sound('scrollMenu',KadeEngineData.gameStyleName));
+		FlxG.sound.play(Paths.sound('scrollMenu', KadeEngineData.gameStyleName));
 
 		updateText();
 	}
@@ -421,7 +425,8 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.text = "Tracks\n";
 
 		// TODO: find a way to load this as a txt
-		if(KadeEngineData.gameStyleName == 'b-side') {
+		if (KadeEngineData.gameStyleName == 'b-side')
+		{
 			weekData = [
 				['Tutorial'],
 				['Bopeebo', 'Fresh', 'Dad Battle'],
