@@ -263,18 +263,20 @@ class PlayState extends MusicBeatState
 		// Making difficulty text for Discord Rich Presence.
 		storyDifficultyText = CoolUtil.difficultyFromInt(storyDifficulty);
 
-		iconRPC = SONG.player2;
+		iconPreRPC = SONG.player2;
 
 		// To avoid having duplicate images in Discord assets
-		switch (iconRPC)
+		switch (iconPreRPC)
 		{
 			case 'senpai-angry':
-				iconRPC = 'senpai';
+				iconPreRPC = 'senpai';
 			case 'monster-christmas':
-				iconRPC = 'monster';
+				iconPreRPC = 'monster';
 			case 'mom-car':
-				iconRPC = 'mom';
+				iconPreRPC = 'mom';
 		}
+
+		iconRPC = KadeEngineData.gameStyleName + '_' + iconPreRPC;
 
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
@@ -3000,7 +3002,7 @@ class PlayState extends MusicBeatState
 						}
 					});
 
-					#if final
+					#if !final
 					trace('\nCURRENT LINE:\n' + directionsAccounted);
 					#end
 		 
