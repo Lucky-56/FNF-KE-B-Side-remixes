@@ -287,7 +287,7 @@ class PlayState extends MusicBeatState
 		// Making difficulty text for Discord Rich Presence.
 		storyDifficultyText = CoolUtil.difficultyFromInt(storyDifficulty);
 
-		iconPreRPC = SONG.player2;
+		var iconPreRPC = SONG.player2;
 
 		// To avoid having duplicate images in Discord assets
 		switch (iconPreRPC)
