@@ -964,6 +964,8 @@ class PlayState extends MusicBeatState
 		scoreTxt = new FlxText(FlxG.width / 2 - 235, healthBarBG.y + 50, 0, "", 20);
 		if (!FlxG.save.data.accuracyDisplay)
 			scoreTxt.x = healthBarBG.x + healthBarBG.width / 2;
+		if (!FlxG.save.data.healthDisplay)
+			scoreTxt.x += -120;
 		scoreTxt.setFormat(Paths.font("vcr.ttf",KadeEngineData.gameStyleName), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		if (offsetTesting)
@@ -1875,9 +1877,9 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = Ratings.CalculateRanking(songScore,songScoreDef,nps,maxNPS,accuracy);
-		if (!FlxG.save.data.accuracyDisplay)
-			scoreTxt.text = "Score: " + songScore;
+		var healthInt:Int = Std.int(health * 50);
+
+		scoreTxt.text = Ratings.CalculateRanking(songScore,songScoreDef,nps,maxNPS,healthInt,accuracy);
 
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
